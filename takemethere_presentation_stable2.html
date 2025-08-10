@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reimagining Business Travel with Generative AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0e27;
+            color: #e4e4e7;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #a1a1aa;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease, transform 0.2s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+            transform: translateY(-1px);
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 6rem 2rem 2rem;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+            background: radial-gradient(ellipse at bottom, #1e293b 0%, #0a0e27 100%);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: #a1a1aa;
+            margin-bottom: 2rem;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 2rem;
+            color: #71717a;
+        }
+
+        /* Cards - With hover effects */
+        .card {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: border-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #f4f4f5;
+        }
+
+        .card h4 {
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #667eea;
+        }
+
+        /* Grid Layouts */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Competitor Analysis */
+        .competitor-card {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .competitor-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            background: #243447;
+        }
+
+        .competitor-card h4 {
+            color: #f4f4f5;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Use Case Table */
+        .use-case-table {
+            width: 100%;
+            background: #1e293b;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+
+        .use-case-table th {
+            background: #334155;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #f4f4f5;
+        }
+
+        .use-case-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .use-case-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .priority-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .priority-high {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+        }
+
+        .priority-medium {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+        }
+
+        .priority-low {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 2rem;
+            background: #1e293b;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: border-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .timeline-item:hover {
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+            padding-right: 4rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 4rem;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #667eea;
+            border-radius: 50%;
+            top: 2rem;
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        /* Metrics Dashboard */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+
+        .metric-card:hover {
+            border-color: rgba(102, 126, 234, 0.4);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: #f4f4f5;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 0.75rem;
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(102, 126, 234, 0.4);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card:hover .feature-icon {
+            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-header p {
+            font-size: 1.25rem;
+            color: #a1a1aa;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Simple Examples Container */
+        .example-container {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 60px !important;
+                text-align: left !important;
+            }
+
+            .timeline-item::after {
+                left: 10px !important;
+            }
+        }
+
+        /* Progress Indicator */
+        .progress-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #71717a;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .progress-dot:hover {
+            transform: scale(1.3);
+            background: #a1a1aa;
+        }
+
+        .progress-dot.active {
+            background: #667eea;
+            transform: scale(1.5);
+        }
+
+        .progress-dot.active:hover {
+            transform: scale(1.7);
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 2rem;
+            transition: box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+        }
+
+        /* List Styles */
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-rocket"></i>
+                Project Terra
+            </div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#opportunity">Opportunity</a></li>
+                <li><a href="#strategy">Strategy</a></li>
+                <li><a href="#positioning">Positioning</a></li>
+                <li><a href="#alignment">Alignment</a></li>
+                <li><a href="#metrics">Metrics</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <h1>Reimagining Business Travel with Generative AI</h1>
+            <p class="subtitle">Introducing Project Terra</p>
+            <div class="hero-meta">
+                <span><i class="fas fa-building"></i> TakeMeThere Ltd.</span>
+                <span><i class="fas fa-user"></i> Senior Product Manager</span>
+                <span><i class="fas fa-calendar"></i> August 2025</span>
+            </div>
+            <a href="#opportunity" class="cta-button">Explore the Vision</a>
+        </div>
+    </section>
+
+    <!-- Opportunity Space -->
+    <section id="opportunity">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Opportunity Space</h2>
+                <p>Moving beyond incremental improvements to transformative AI experiences</p>
+            </div>
+
+            <!-- User Pain Points Journey -->
+            <div class="card">
+                <h3>The Business Traveler's Journey: Pain Points & Opportunities</h3>
+                <p style="text-align: center; color: #a1a1aa; margin-bottom: 3rem;">Every stage of business travel is broken. Here's how GenAI transforms each touchpoint.</p>
+                
+                <!-- Journey Timeline -->
+                <div style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%); border-radius: 20px; padding: 3rem 2rem; margin: 3rem 0; position: relative; overflow: hidden;">
+                    <!-- Background Pattern -->
+                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle at 20% 20%, rgba(102, 126, 234, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);"></div>
+                    
+                    <!-- Timeline Line -->
+                    <div style="position: absolute; top: 80px; left: 10%; right: 10%; height: 3px; background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); border-radius: 2px; box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);"></div>
+                    
+                    <!-- Journey Stages -->
+                    <div style="display: flex; justify-content: space-between; position: relative; z-index: 2;">
+                        <div style="text-align: center; flex: 1;">
+                            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4); position: relative;">
+                                <i class="fas fa-search" style="color: white; font-size: 1.8rem;"></i>
+                                <div style="position: absolute; inset: -4px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; z-index: -1; filter: blur(8px);"></div>
+                            </div>
+                            <h5 style="margin-top: 1.5rem; color: #f4f4f5; font-weight: 600;">Planning</h5>
+                        </div>
+                        <div style="text-align: center; flex: 1;">
+                            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4); position: relative;">
+                                <i class="fas fa-calendar-check" style="color: white; font-size: 1.8rem;"></i>
+                                <div style="position: absolute; inset: -4px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; z-index: -1; filter: blur(8px);"></div>
+                            </div>
+                            <h5 style="margin-top: 1.5rem; color: #f4f4f5; font-weight: 600;">Booking</h5>
+                        </div>
+                        <div style="text-align: center; flex: 1;">
+                            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4); position: relative;">
+                                <i class="fas fa-plane" style="color: white; font-size: 1.8rem;"></i>
+                                <div style="position: absolute; inset: -4px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; z-index: -1; filter: blur(8px);"></div>
+                            </div>
+                            <h5 style="margin-top: 1.5rem; color: #f4f4f5; font-weight: 600;">Traveling</h5>
+                        </div>
+                        <div style="text-align: center; flex: 1;">
+                            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4); position: relative;">
+                                <i class="fas fa-map-marked-alt" style="color: white; font-size: 1.8rem;"></i>
+                                <div style="position: absolute; inset: -4px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; z-index: -1; filter: blur(8px);"></div>
+                            </div>
+                            <h5 style="margin-top: 1.5rem; color: #f4f4f5; font-weight: 600;">At Destination</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pain Points Grid -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                    <!-- Planning & Booking Pain -->
+                    <div style="background: linear-gradient(135deg, #1e293b 0%, #2d3748 100%); border-radius: 16px; padding: 2.5rem; border: 1px solid rgba(102, 126, 234, 0.1); position: relative; overflow: hidden; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+                        <div style="position: absolute; top: -50%; right: -50%; width: 200px; height: 200px; background: radial-gradient(circle, rgba(239, 68, 68, 0.1) 0%, transparent 70%); border-radius: 50%;"></div>
+                        
+                        <div style="display: flex; align-items: start; gap: 1.5rem; margin-bottom: 2rem; position: relative;">
+                            <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.3) 100%); padding: 1rem; border-radius: 12px; box-shadow: 0 4px 16px rgba(239, 68, 68, 0.2);">
+                                <i class="fas fa-clock" style="color: #fca5a5; font-size: 1.8rem;"></i>
+                            </div>
+                            <div>
+                                <h4 style="color: #f9fafb; margin-bottom: 0.75rem; font-weight: 600;">30+ Minutes Per Booking</h4>
+                                <p style="color: #d1d5db; font-style: italic; line-height: 1.5;">"I spend more time booking than actually planning my meetings"</p>
+                            </div>
+                        </div>
+                        
+                        <div style="position: relative;">
+                            <div style="background: rgba(255, 255, 255, 0.05); height: 1px; margin-bottom: 1.5rem;"></div>
+                            <div style="margin-bottom: 1.5rem;">
+                                <p style="color: #9ca3af; margin-bottom: 1rem; font-weight: 500;"><span style="color: #ef4444;">●</span> <strong>Today:</strong> 15+ tabs, endless filters, manual comparisons</p>
+                            </div>
+                            <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #667eea; backdrop-filter: blur(10px);">
+                                <p style="color: #f9fafb; font-weight: 500;"><span style="color: #667eea;">✨</span> <strong>With GenAI:</strong> One conversation. "Book me a trip to SF next week for the product summit." Done.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Travel Disruption Pain -->
+                    <div style="background: linear-gradient(135deg, #1e293b 0%, #2d3748 100%); border-radius: 16px; padding: 2.5rem; border: 1px solid rgba(102, 126, 234, 0.1); position: relative; overflow: hidden; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+                        <div style="position: absolute; top: -50%; right: -50%; width: 200px; height: 200px; background: radial-gradient(circle, rgba(239, 68, 68, 0.1) 0%, transparent 70%); border-radius: 50%;"></div>
+                        
+                        <div style="display: flex; align-items: start; gap: 1.5rem; margin-bottom: 2rem; position: relative;">
+                            <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.3) 100%); padding: 1rem; border-radius: 12px; box-shadow: 0 4px 16px rgba(239, 68, 68, 0.2);">
+                                <i class="fas fa-exclamation-triangle" style="color: #fca5a5; font-size: 1.8rem;"></i>
+                            </div>
+                            <div>
+                                <h4 style="color: #f9fafb; margin-bottom: 0.75rem; font-weight: 600;">Reactive Crisis Mode</h4>
+                                <p style="color: #d1d5db; font-style: italic; line-height: 1.5;">"I find out about delays when I'm already at the gate"</p>
+                            </div>
+                        </div>
+                        
+                        <div style="position: relative;">
+                            <div style="background: rgba(255, 255, 255, 0.05); height: 1px; margin-bottom: 1.5rem;"></div>
+                            <div style="margin-bottom: 1.5rem;">
+                                <p style="color: #9ca3af; margin-bottom: 1rem; font-weight: 500;"><span style="color: #ef4444;">●</span> <strong>Today:</strong> Scrambling for alternatives, long rebooking lines</p>
+                            </div>
+                            <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #667eea; backdrop-filter: blur(10px);">
+                                <p style="color: #f9fafb; font-weight: 500;"><span style="color: #667eea;">✨</span> <strong>With GenAI:</strong> Proactive alerts 2 hours early with pre-approved alternatives ready</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                    <!-- Personalization Pain -->
+                    <div style="background: linear-gradient(135deg, #1e293b 0%, #2d3748 100%); border-radius: 16px; padding: 2.5rem; border: 1px solid rgba(102, 126, 234, 0.1); position: relative; overflow: hidden; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+                        <div style="position: absolute; top: -50%; right: -50%; width: 200px; height: 200px; background: radial-gradient(circle, rgba(239, 68, 68, 0.1) 0%, transparent 70%); border-radius: 50%;"></div>
+                        
+                        <div style="display: flex; align-items: start; gap: 1.5rem; margin-bottom: 2rem; position: relative;">
+                            <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.3) 100%); padding: 1rem; border-radius: 12px; box-shadow: 0 4px 16px rgba(239, 68, 68, 0.2);">
+                                <i class="fas fa-robot" style="color: #fca5a5; font-size: 1.8rem;"></i>
+                            </div>
+                            <div>
+                                <h4 style="color: #f9fafb; margin-bottom: 0.75rem; font-weight: 600;">Zero Personal Context</h4>
+                                <p style="color: #d1d5db; font-style: italic; line-height: 1.5;">"Every trip feels like I'm a first-time user"</p>
+                            </div>
+                        </div>
+                        
+                        <div style="position: relative;">
+                            <div style="background: rgba(255, 255, 255, 0.05); height: 1px; margin-bottom: 1.5rem;"></div>
+                            <div style="margin-bottom: 1.5rem;">
+                                <p style="color: #9ca3af; margin-bottom: 1rem; font-weight: 500;"><span style="color: #ef4444;">●</span> <strong>Today:</strong> Generic recommendations, repetitive preferences</p>
+                            </div>
+                            <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #667eea; backdrop-filter: blur(10px);">
+                                <p style="color: #f9fafb; font-weight: 500;"><span style="color: #667eea;">✨</span> <strong>With GenAI:</strong> Learns your patterns, suggests your favorite airline seats & hotels</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Support Pain -->
+                    <div style="background: linear-gradient(135deg, #1e293b 0%, #2d3748 100%); border-radius: 16px; padding: 2.5rem; border: 1px solid rgba(102, 126, 234, 0.1); position: relative; overflow: hidden; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+                        <div style="position: absolute; top: -50%; right: -50%; width: 200px; height: 200px; background: radial-gradient(circle, rgba(239, 68, 68, 0.1) 0%, transparent 70%); border-radius: 50%;"></div>
+                        
+                        <div style="display: flex; align-items: start; gap: 1.5rem; margin-bottom: 2rem; position: relative;">
+                            <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.3) 100%); padding: 1rem; border-radius: 12px; box-shadow: 0 4px 16px rgba(239, 68, 68, 0.2);">
+                                <i class="fas fa-question-circle" style="color: #fca5a5; font-size: 1.8rem;"></i>
+                            </div>
+                            <div>
+                                <h4 style="color: #f9fafb; margin-bottom: 0.75rem; font-weight: 600;">Abandoned In-Transit</h4>
+                                <p style="color: #d1d5db; font-style: italic; line-height: 1.5;">"Once I leave home, I'm on my own"</p>
+                            </div>
+                        </div>
+                        
+                        <div style="position: relative;">
+                            <div style="background: rgba(255, 255, 255, 0.05); height: 1px; margin-bottom: 1.5rem;"></div>
+                            <div style="margin-bottom: 1.5rem;">
+                                <p style="color: #9ca3af; margin-bottom: 1rem; font-weight: 500;"><span style="color: #ef4444;">●</span> <strong>Today:</strong> Static PDFs, no real-time help</p>
+                            </div>
+                            <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #667eea; backdrop-filter: blur(10px);">
+                                <p style="color: #f9fafb; font-weight: 500;"><span style="color: #667eea;">✨</span> <strong>With GenAI:</strong> 24/7 assistant that knows your location, schedule & preferences</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary Stats -->
+                <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%); border-radius: 20px; padding: 3rem; margin-top: 3rem; text-align: center; position: relative; overflow: hidden; backdrop-filter: blur(20px); border: 1px solid rgba(102, 126, 234, 0.2);">
+                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle at 30% 30%, rgba(102, 126, 234, 0.1) 0%, transparent 50%), radial-gradient(circle at 70% 70%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);"></div>
+                    
+                    <h4 style="color: #667eea; margin-bottom: 2rem; font-size: 1.5rem; position: relative; z-index: 2;"> The Cost of Friction</h4>
+                    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 3rem; position: relative; z-index: 2;">
+                        <div>
+                            <div style="background: rgba(239, 68, 68, 0.1); border-radius: 16px; padding: 1.5rem; margin-bottom: 0.5rem;">
+                                <p style="font-size: 3rem; font-weight: 700; color: #fca5a5; margin: 0; text-shadow: 0 0 20px rgba(239, 68, 68, 0.5);">84%</p>
+                            </div>
+                            <p style="color: #d1d5db; font-weight: 500;">Experience travel disruptions</p>
+                        </div>
+                        <div>
+                            <div style="background: rgba(239, 68, 68, 0.1); border-radius: 16px; padding: 1.5rem; margin-bottom: 0.5rem;">
+                                <p style="font-size: 3rem; font-weight: 700; color: #fca5a5; margin: 0; text-shadow: 0 0 20px rgba(239, 68, 68, 0.5);">42%</p>
+                            </div>
+                            <p style="color: #d1d5db; font-weight: 500;">Face travel-related anxiety</p>
+                        </div>
+                        <div>
+                            <div style="background: rgba(239, 68, 68, 0.1); border-radius: 16px; padding: 1.5rem; margin-bottom: 0.5rem;">
+                                <p style="font-size: 3rem; font-weight: 700; color: #fca5a5; margin: 0; text-shadow: 0 0 20px rgba(239, 68, 68, 0.5);">85%</p>
+                            </div>
+                            <p style="color: #d1d5db; font-weight: 500;">Report productivity loss</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GenAI Use Cases Prioritization -->
+            <div class="card" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); position: relative; overflow: hidden;">
+                <!-- Background Pattern -->
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.05) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.05) 0%, transparent 50%);"></div>
+                
+                <div style="position: relative; z-index: 2;">
+                    <div style="text-align: center; margin-bottom: 4rem;">
+                        <h3 style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 2rem; margin-bottom: 1rem;">GenAI Use Cases: Prioritized for Maximum Impact</h3>
+                        <p style="color: #a1a1aa; font-size: 1.1rem;">Building the MVP that users will love, with features they can't live without</p>
+                    </div>
+                
+                    <!-- Priority Framework -->
+                    <div style="background: rgba(255, 255, 255, 0.02); border-radius: 20px; padding: 3rem; margin-bottom: 3rem; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05);">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+                            
+                            <!-- HIGH Priority -->
+                            <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%); border-radius: 16px; padding: 2rem; position: relative; overflow: hidden; border: 2px solid rgba(102, 126, 234, 0.3);">
+                                <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; opacity: 0.1;"></div>
+                                <div style="position: relative; z-index: 2;">
+                                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);">
+                                            <i class="fas fa-rocket" style="color: white; font-size: 1.2rem;"></i>
+                                        </div>
+                                        <div>
+                                            <h4 style="color: #667eea; margin: 0; font-size: 1.3rem;">HIGH Priority</h4>
+                                            <p style="color: #a1a1aa; margin: 0; font-size: 0.875rem;">Ship in MVP • Q1 </p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="space-y: 1.5rem;">
+                                        <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+                                            <h5 style="color: #f4f4f5; font-size: 1.1rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-brain" style="color: #667eea;"></i> LLM-Powered AI Agent</h5>
+                                            <p style="font-size: 0.875rem; color: #e4e4e7; margin: 0;">Natural language trip planning. Talk to book. Zero forms.</p>
+                                        </div>
+                                        
+                                        <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 1.5rem;">
+                                            <h5 style="color: #f4f4f5; font-size: 1.1rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-eye" style="color: #667eea;"></i> Real-Time Context Awareness</h5>
+                                            <p style="font-size: 0.875rem; color: #e4e4e7; margin: 0;">Location, preferences, and trip context for personalized assistance.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- MEDIUM Priority -->
+                            <div style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.15) 100%); border-radius: 16px; padding: 2rem; position: relative; overflow: hidden; border: 2px solid rgba(251, 191, 36, 0.3);">
+                                <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); border-radius: 50%; opacity: 0.1;"></div>
+                                <div style="position: relative; z-index: 2;">
+                                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                                        <div style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 16px rgba(251, 191, 36, 0.3);">
+                                            <i class="fas fa-chart-line" style="color: white; font-size: 1.2rem;"></i>
+                                        </div>
+                                        <div>
+                                            <h4 style="color: #fbbf24; margin: 0; font-size: 1.3rem;">MEDIUM Priority</h4>
+                                            <p style="color: #a1a1aa; margin: 0; font-size: 0.875rem;">Phase 2 • Q2-Q3 </p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 1.5rem;">
+                                        <h5 style="color: #f4f4f5; font-size: 1.1rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-receipt" style="color: #fbbf24;"></i> Intelligent Document Processing</h5>
+                                        <p style="font-size: 0.875rem; color: #e4e4e7; margin: 0;">Auto-extract receipts, categorize expenses, submit reports. Needs multimodal AI.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- LOW Priority -->
+                            <div style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(16, 185, 129, 0.15) 100%); border-radius: 16px; padding: 2rem; position: relative; overflow: hidden; border: 2px solid rgba(34, 197, 94, 0.3);">
+                                <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: linear-gradient(135deg, #22c55e 0%, #10b981 100%); border-radius: 50%; opacity: 0.1;"></div>
+                                <div style="position: relative; z-index: 2;">
+                                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                                        <div style="background: linear-gradient(135deg, #22c55e 0%, #10b981 100%); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 16px rgba(34, 197, 94, 0.3);">
+                                            <i class="fas fa-clock" style="color: white; font-size: 1.2rem;"></i>
+                                        </div>
+                                        <div>
+                                            <h4 style="color: #22c55e; margin: 0; font-size: 1.3rem;">LOW Priority</h4>
+                                            <p style="color: #a1a1aa; margin: 0; font-size: 0.875rem;">Future Phases</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 1.5rem;">
+                                        <h5 style="color: #f4f4f5; font-size: 1.1rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-crystal-ball" style="color: #22c55e;"></i> Predictive Disruption Management</h5>
+                                        <p style="font-size: 0.875rem; color: #e4e4e7; margin: 0;">Anticipate delays, auto-rebook flights. Requires airline APIs, weather data & ML models.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rationale Section -->
+                    <div style="background: rgba(255, 255, 255, 0.03); border-radius: 16px; padding: 2.5rem; border-left: 4px solid #667eea;">
+                        <h4 style="color: #667eea; margin-bottom: 1.5rem; font-size: 1.3rem; display: flex; align-items: center; gap: 0.75rem;"><i class="fas fa-lightbulb"></i> Strategic Rationale</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                            <div style="display: flex; gap: 1rem;">
+                                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    <span style="color: white; font-weight: 700;">1</span>
+                                </div>
+                                <div>
+                                    <p style="color: #f4f4f5; font-weight: 600; margin-bottom: 0.5rem;">Start with Proven Technology</p>
+                                    <p style="color: #a1a1aa; font-size: 0.875rem; margin: 0;">LLM chat interfaces work today. Ship fast, delight users immediately.</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 1rem;">
+                                <div style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    <span style="color: white; font-weight: 700;">2</span>
+                                </div>
+                                <div>
+                                    <p style="color: #f4f4f5; font-weight: 600; margin-bottom: 0.5rem;">Build Complexity Gradually</p>
+                                    <p style="color: #a1a1aa; font-size: 0.875rem; margin: 0;">Add multimodal AI when infrastructure matures.</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 1rem;">
+                                <div style="background: linear-gradient(135deg, #22c55e 0%, #10b981 100%); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    <span style="color: white; font-weight: 700;">3</span>
+                                </div>
+                                <div>
+                                    <p style="color: #f4f4f5; font-weight: 600; margin-bottom: 0.5rem;">Save Complex Integrations</p>
+                                    <p style="color: #a1a1aa; font-size: 0.875rem; margin: 0;">Predictive features need airline partnerships - high reward, high complexity.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Target Segment -->
+            <div class="card">
+                <h3>Target Segment: Next-Generation Business Travelers</h3>
+                <p>Focus on Millennial and Gen Z professionals (ages 25-40) in North America</p>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h4>Digital Natives</h4>
+                        <p>Expect intuitive, mobile-first, seamless digital experiences</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <h4>Value Personalization</h4>
+                        <p>Reject one-size-fits-all solutions, demand real-time adaptation</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-umbrella-beach"></i>
+                        </div>
+                        <h4>Seek "Bleisure"</h4>
+                        <p>Blend business with leisure, appreciate personal interest recommendations</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h4>Demand Control</h4>
+                        <p>Want empowering tools with less friction and more flexibility</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Strategy -->
+    <section id="strategy">
+        <div class="container">
+            <div class="section-header">
+                <h2>Product Strategy</h2>
+                <p>Building "Terra" - The Intelligent Travel Co-Pilot</p>
+            </div>
+
+            <!-- Core Strategy -->
+            <div class="card">
+                <h3>Core Product Vision</h3>
+                <p>Not just adding an "AI button" but redesigning the entire experience around a conversational, proactive AI co-pilot, Terra, that serves as the central nervous system of TakeMeThere.</p>
+            </div>
+
+            <!-- Product Roadmap -->
+            <div class="card">
+                <h3>Phased Product Roadmap</h3>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Phase 1: Quick Wins (Months 1-4)</h4>
+                        <p><strong>High Priority - Foundation Features</strong></p>
+                        <ul>
+                            <li>LLM-Powered Trip Planning - Natural language booking interface</li>
+                            <li>AI Travel Assistant - 24/7 contextual chat support</li>
+                            <li>Core conversation flows and user preference learning</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Phase 2: Strategic Expansion (Months 5-10)</h4>
+                        <p><strong>Medium Priority - Value-Add Features</strong></p>
+                        <ul>
+                            <li>Expense Automation - OCR receipt processing</li>
+                            <li>Policy Compliance - Real-time expense checking</li>
+                            <li>Enhanced personalization and user profiles</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Phase 3: Advanced Intelligence (Months 10+)</h4>
+                        <p><strong>Low Priority - Complex Integrations</strong></p>
+                        <ul>
+                            <li>Predictive Disruption Management - Proactive rebooking</li>
+                            <li>Multi-system integrations (airline APIs, weather data)</li>
+                            <li>Full autonomous travel agent capabilities</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Terra Demo -->
+            <div class="card">
+                <h3>Experience Terra in Action</h3>
+                <p style="text-align: center; color: #a1a1aa; margin-bottom: 3rem;">Click through real user journeys to see how Terra transforms business travel</p>
+                
+                <!-- Demo Navigation -->
+                <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap;">
+                    <button class="demo-btn" onclick="showDemo('booking')" id="btn-booking" style="background: #667eea; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s;">
+                        <i class="fas fa-plane-departure"></i> Trip Booking Journey
+                    </button>
+                    <button class="demo-btn" onclick="showDemo('travel')" id="btn-travel" style="background: #334155; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s;">
+                        <i class="fas fa-map-marked-alt"></i> Travel Assistance
+                    </button>
+                    <button class="demo-btn" onclick="showDemo('disruption')" id="btn-disruption" style="background: #334155; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s;">
+                        <i class="fas fa-exclamation-triangle"></i> Disruption Management
+                    </button>
+                </div>
+
+                <!-- Demo Screen Container -->
+                <div id="demo-container" style="background: #0a0e27; border-radius: 16px; padding: 2rem; min-height: 600px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                    
+                    <!-- Booking Demo -->
+                    <div id="demo-booking" class="demo-content">
+                        <div style="background: #1e293b; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <div style="width: 40px; height: 40px; background: #667eea; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-user" style="color: white;"></i>
+                                </div>
+                                <div>
+                                    <h5 style="color: #f4f4f5; margin: 0;">Sarah Chen</h5>
+                                    <p style="color: #a1a1aa; margin: 0; font-size: 0.875rem;">Product Manager at TechCorp</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Interface Mock -->
+                        <div style="background: #1e293b; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;">
+                            <h5 style="color: #667eea; margin-bottom: 1rem;"><i class="fas fa-robot"></i> Chat with Terra</h5>
+                            
+                            <!-- User Input -->
+                            <div style="margin-bottom: 1.5rem; padding: 1rem; background: #667eea; border-radius: 8px; margin-left: 20%; text-align: right;">
+                                <p style="margin: 0; color: white;"><strong>Sarah:</strong> Hi Terra! I need to book a trip to London for our Q4 planning session. It's from March 15-18, and I need to be near the Canary Wharf area for meetings.</p>
+                            </div>
+                            
+                            <!-- Terra Response 1 -->
+                            <div style="margin-bottom: 1.5rem; padding: 1rem; background: #334155; border-radius: 8px; margin-right: 20%;">
+                                <p style="margin: 0; color: #f4f4f5;"><strong>Terra:</strong> Perfect! I see you're planning a Q4 session in London. Let me help you with that.</p>
+                                <p style="margin: 0.5rem 0 0 0; color: #e4e4e7; font-size: 0.875rem;">I've found your preferences: You prefer aisle seats, usually book 4-star hotels, and need fast WiFi for work. Is this still accurate?</p>
+                            </div>
+                            
+                            <!-- User Confirmation -->
+                            <div style="margin-bottom: 1.5rem; padding: 1rem; background: #667eea; border-radius: 8px; margin-left: 20%; text-align: right;">
+                                <p style="margin: 0; color: white;"><strong>Sarah:</strong> Yes, exactly! And I'd prefer to arrive Sunday evening so I can settle in.</p>
+                            </div>
+                            
+                            <!-- Terra Recommendation -->
+                            <div style="padding: 1rem; background: #334155; border-radius: 8px; margin-right: 20%;">
+                                <p style="margin: 0 0 1rem 0; color: #f4f4f5;"><strong>Terra:</strong> Excellent! I've curated 3 options for you:</p>
+                                
+                                <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); padding: 1rem; border-radius: 8px; border-left: 3px solid #667eea; margin-bottom: 1rem;">
+                                    <h6 style="color: #667eea; margin: 0 0 0.5rem 0;">🎯 Recommended Option</h6>
+                                    <p style="margin: 0 0 0.5rem 0; font-size: 0.875rem;"><strong>Flight:</strong> BA 283 departs 6:15 PM, arrives 7:40 AM+1 (aisle seat 14C)</p>
+                                    <p style="margin: 0 0 0.5rem 0; font-size: 0.875rem;"><strong>Hotel:</strong> Hilton Canary Wharf - 2 min walk to your meeting location</p>
+                                    <p style="margin: 0 0 0.5rem 0; font-size: 0.875rem;"><strong>Total:</strong> $2,847 (within your $3K policy limit)</p>
+                                    <p style="margin: 0.5rem 0 0 0; font-size: 0.75rem; color: #a1a1aa;"><em>Why recommended: Direct flight on your preferred airline, your usual hotel chain, and 15% under budget for potential upgrades.</em></p>
+                                </div>
+                                
+                                <button style="background: #667eea; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; cursor: pointer; margin-right: 1rem;">Book This Option</button>
+                                <button style="background: transparent; color: #667eea; border: 1px solid #667eea; padding: 0.75rem 1.5rem; border-radius: 6px; cursor: pointer;">See Other Options</button>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(102, 126, 234, 0.1); border-radius: 8px; padding: 1rem; border-left: 3px solid #667eea;">
+                            <p style="margin: 0; font-size: 0.875rem; color: #e4e4e7;"><strong>Key Features:</strong> Natural language understanding • Preference learning • Policy compliance • Explainable recommendations • One-click booking</p>
+                        </div>
+                    </div>
+
+                    <!-- Travel Assistance Demo -->
+                    <div id="demo-travel" class="demo-content" style="display: none;">
+                        <div style="background: #1e293b; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <div style="width: 40px; height: 40px; background: #667eea; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-map-marker-alt" style="color: white;"></i>
+                                </div>
+                                <div>
+                                    <h5 style="color: #f4f4f5; margin: 0;">Currently in London</h5>
+                                    <p style="color: #a1a1aa; margin: 0; font-size: 0.875rem;">Day 2 of business trip • 2:30 PM local time</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Travel Q&A Chat -->
+                        <div style="background: #1e293b; border-radius: 12px; padding: 1.5rem;">
+                            <h5 style="color: #667eea; margin-bottom: 1rem;"><i class="fas fa-robot"></i> Terra - Your Travel Assistant</h5>
+                            
+                            <!-- Query 1 -->
+                            <div style="margin-bottom: 1.5rem; padding: 1rem; background: #667eea; border-radius: 8px; margin-left: 20%; text-align: right;">
+                                <p style="margin: 0; color: white;"><strong>Sarah:</strong> My meeting just finished early. Can you find me a good coffee shop nearby where I can work for an hour before my next meeting?</p>
+                            </div>
+                            
+                            <div style="margin-bottom: 1.5rem; padding: 1rem; background: #334155; border-radius: 8px; margin-right: 20%;">
+                                <p style="margin: 0 0 0.5rem 0; color: #f4f4f5;"><strong>Terra:</strong> Perfect timing! I found 3 great spots within 5 minutes of your location:</p>
+                                <div style="margin: 0.5rem 0;">
+                                    <p style="margin: 0; font-size: 0.875rem;"><strong>☕ Monmouth Coffee</strong> - 2 min walk, known for excellent WiFi and quiet atmosphere</p>
+                                    <p style="margin: 0; font-size: 0.875rem; color: #a1a1aa;">I've checked - they have power outlets and your next meeting is only 8 minutes away.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Query 2 -->
+                            <div style="margin-bottom: 1.5rem; padding: 1rem; background: #667eea; border-radius: 8px; margin-left: 20%; text-align: right;">
+                                <p style="margin: 0; color: white;"><strong>Sarah:</strong> Great! Also, what's the weather like tomorrow? Should I pack an umbrella for the client dinner?</p>
+                            </div>
+                            
+                            <div style="margin-bottom: 1.5rem; padding: 1rem; background: #334155; border-radius: 8px; margin-right: 20%;">
+                                <p style="margin: 0 0 0.5rem 0; color: #f4f4f5;"><strong>Terra:</strong> Smart thinking! Tomorrow shows 70% chance of rain between 5-8 PM. Your dinner at Sketch is at 7 PM, so yes - definitely bring an umbrella.</p>
+                                <p style="margin: 0; font-size: 0.875rem; color: #a1a1aa;">Pro tip: The restaurant provides umbrella service, but having your own means no wait time.</p>
+                            </div>
+                            
+                            <!-- Query 3 -->
+                            <div style="margin-bottom: 1.5rem; padding: 1rem; background: #667eea; border-radius: 8px; margin-left: 20%; text-align: right;">
+                                <p style="margin: 0; color: white;"><strong>Sarah:</strong> One more thing - can you book me an Uber to the restaurant tomorrow? I want to arrive 10 minutes early.</p>
+                            </div>
+                            
+                            <div style="padding: 1rem; background: #334155; border-radius: 8px; margin-right: 20%;">
+                                <p style="margin: 0 0 0.5rem 0; color: #f4f4f5;"><strong>Terra:</strong> Absolutely! I've scheduled an Uber for 6:35 PM tomorrow from your hotel.</p>
+                                <div style="background: rgba(102, 126, 234, 0.1); padding: 0.75rem; border-radius: 6px; margin: 0.5rem 0;">
+                                    <p style="margin: 0; font-size: 0.875rem;">📱 Uber booked for Wed 6:35 PM</p>
+                                    <p style="margin: 0; font-size: 0.875rem;">🎯 Hilton Canary Wharf → Sketch Restaurant</p>
+                                    <p style="margin: 0; font-size: 0.875rem;">⏱️ 15-min ride, arrive 6:50 PM (10 min early as requested)</p>
+                                </div>
+                                <p style="margin: 0; font-size: 0.875rem; color: #a1a1aa;">I've added this to your itinerary and will remind you 10 minutes before pickup.</p>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(102, 126, 234, 0.1); border-radius: 8px; padding: 1rem; border-left: 3px solid #667eea; margin-top: 1rem;">
+                            <p style="margin: 0; font-size: 0.875rem; color: #e4e4e7;"><strong>Key Features:</strong> Real-time location awareness • Weather integration • Local recommendations • Contextual booking • Proactive reminders</p>
+                        </div>
+                    </div>
+
+                    <!-- Disruption Management Demo -->
+                    <div id="demo-disruption" class="demo-content" style="display: none;">
+                        <div style="background: #1e293b; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <div style="width: 40px; height: 40px; background: #f87171; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-exclamation-triangle" style="color: white;"></i>
+                                </div>
+                                <div>
+                                    <h5 style="color: #f4f4f5; margin: 0;">Flight Disruption Detected</h5>
+                                    <p style="color: #a1a1aa; margin: 0; font-size: 0.875rem;">2 hours before departure • Heathrow Airport</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notification Screen -->
+                        <div style="background: rgba(239, 68, 68, 0.1); border-radius: 12px; padding: 2rem; border: 2px solid rgba(239, 68, 68, 0.3); margin-bottom: 2rem;">
+                            <div style="text-align: center; margin-bottom: 2rem;">
+                                <div style="width: 80px; height: 80px; background: rgba(239, 68, 68, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                                    <i class="fas fa-plane" style="color: #f87171; font-size: 2rem;"></i>
+                                </div>
+                                <h4 style="color: #f87171; margin: 0 0 0.5rem 0;">Flight Disruption Alert</h4>
+                                <p style="color: #e4e4e7; margin: 0;">BA 284 • LHR → JFK • Scheduled: 8:15 PM</p>
+                            </div>
+                            
+                            <div style="background: #1e293b; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem;">
+                                <p style="margin: 0 0 1rem 0; color: #f4f4f5;"><strong>🤖 Terra Analysis:</strong></p>
+                                <p style="margin: 0 0 0.5rem 0; color: #e4e4e7;">• Storm system moving through London causing 2-3 hour delays</p>
+                                <p style="margin: 0 0 0.5rem 0; color: #e4e4e7;">• Your flight has 85% chance of 2+ hour delay</p>
+                                <p style="margin: 0 0 1rem 0; color: #e4e4e7;">• This will cause you to miss your 9 AM NYC meeting</p>
+                                
+                                <div style="background: rgba(102, 126, 234, 0.1); border-radius: 6px; padding: 1rem; border-left: 3px solid #667eea;">
+                                    <p style="margin: 0; color: #f4f4f5; font-weight: 600;">✨ I've pre-vetted 3 alternative solutions:</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Alternative Options -->
+                            <div style="display: grid; gap: 1rem;">
+                                <!-- Option 1 -->
+                                <div style="background: #1e293b; border-radius: 8px; padding: 1rem; border-left: 3px solid #667eea;">
+                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem;">
+                                        <h6 style="color: #667eea; margin: 0;">🎯 Recommended: Earlier Flight</h6>
+                                        <span style="background: rgba(102, 126, 234, 0.2); color: #667eea; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem;">AVAILABLE</span>
+                                    </div>
+                                    <p style="margin: 0 0 0.5rem 0; font-size: 0.875rem; color: #e4e4e7;"><strong>BA 112</strong> - Departs 4:15 PM today, arrives 7:30 PM (NYC time)</p>
+                                    <p style="margin: 0 0 0.5rem 0; font-size: 0.875rem; color: #e4e4e7;">Same seat type (14C aisle) • No extra cost</p>
+                                    <p style="margin: 0; font-size: 0.75rem; color: #a1a1aa;"><em>Why best: Gets you to NYC 3 hours earlier, same great seat, perfect for your 9 AM meeting</em></p>
+                                </div>
+                                
+                                <!-- Option 2 -->
+                                <div style="background: #1e293b; border-radius: 8px; padding: 1rem;">
+                                    <h6 style="color: #fbbf24; margin: 0 0 0.5rem 0;">⚡ Alternative: Different Airline</h6>
+                                    <p style="margin: 0 0 0.5rem 0; font-size: 0.875rem; color: #e4e4e7;"><strong>VS 45</strong> - Departs 9:45 PM, arrives 12:30 AM+1</p>
+                                    <p style="margin: 0; font-size: 0.875rem; color: #e4e4e7;">Premium Economy available • +$200</p>
+                                </div>
+                                
+                                <!-- Option 3 -->
+                                <div style="background: #1e293b; border-radius: 8px; padding: 1rem;">
+                                    <h6 style="color: #a1a1aa; margin: 0 0 0.5rem 0;">📅 Wait it Out</h6>
+                                    <p style="margin: 0 0 0.5rem 0; font-size: 0.875rem; color: #e4e4e7;">Keep original flight, reschedule NYC meeting to 2 PM</p>
+                                    <p style="margin: 0; font-size: 0.875rem; color: #a1a1aa;">I can contact your client to reschedule</p>
+                                </div>
+                            </div>
+                            
+                            <div style="text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                                <button style="background: #667eea; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-weight: 600; cursor: pointer; margin-right: 1rem;">Book BA 112 (4:15 PM)</button>
+                                <button style="background: transparent; color: #667eea; border: 1px solid #667eea; padding: 1rem 2rem; border-radius: 8px; cursor: pointer;">See All Options</button>
+                            </div>
+                        </div>
+                        
+                        <div style="background: rgba(102, 126, 234, 0.1); border-radius: 8px; padding: 1rem; border-left: 3px solid #667eea;">
+                            <p style="margin: 0; font-size: 0.875rem; color: #e4e4e7;"><strong>Key Features:</strong> Predictive disruption detection • Pre-vetted alternatives • Policy compliance checking • One-click rebooking • Meeting impact analysis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                .demo-btn:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                }
+                .demo-btn.active {
+                    background: #667eea !important;
+                }
+                .demo-content {
+                    animation: fadeIn 0.5s ease-in-out;
+                }
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(20px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+            </style>
+
+            <script>
+                function showDemo(demoType) {
+                    // Hide all demos
+                    document.querySelectorAll('.demo-content').forEach(demo => {
+                        demo.style.display = 'none';
+                    });
+                    
+                    // Reset all buttons
+                    document.querySelectorAll('.demo-btn').forEach(btn => {
+                        btn.style.background = '#334155';
+                        btn.classList.remove('active');
+                    });
+                    
+                    // Show selected demo
+                    document.getElementById('demo-' + demoType).style.display = 'block';
+                    
+                    // Highlight selected button
+                    document.getElementById('btn-' + demoType).style.background = '#667eea';
+                    document.getElementById('btn-' + demoType).classList.add('active');
+                }
+                
+                // Initialize with booking demo
+                document.addEventListener('DOMContentLoaded', function() {
+                    showDemo('booking');
+                });
+            </script>
+
+            <!-- Trust & Transparency -->
+            <div class="card">
+                <h3>Building Trust & Transparency</h3>
+                
+                <div class="grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-brain"></i> Explainable AI (XAI)</h4>
+                        <p>Every recommendation includes plain-language explanations</p>
+                        <div class="highlight-box">
+                            <p><em>"Chosen because it's the cheapest direct flight that gets you there before 10 AM, on your preferred airline."</em></p>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-user-shield"></i> User in Control</h4>
+                        <p>AI suggests, user decides. No autonomous bookings without explicit permission.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-lock"></i> Privacy by Design</h4>
+                        <p>Transparent data usage with user-controlled privacy dashboard</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-balance-scale"></i> Ethical Guardrails</h4>
+                        <p>Rigorous testing to prevent hallucinations and bias in recommendations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Positioning -->
+    <section id="positioning">
+        <div class="container">
+            <div class="section-header">
+                <h2>Market Positioning & GTM</h2>
+                <p>Establishing TakeMeThere as the intelligent travel platform</p>
+            </div>
+
+            <!-- UVP -->
+            <div class="card">
+                <h3>Unique Value Proposition</h3>
+                <div class="highlight-box">
+                    <h4>TakeMeThere is the intelligent travel platform that proactively manages your entire business trip, so you can focus on what matters.</h4>
+                    <p>We deliver differentiated value by anticipating needs and simplifying decision-making.</p>
+                </div>
+            </div>
+
+            <!-- Competitive Positioning -->
+            <div class="card" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); position: relative; overflow: hidden;">
+                <!-- Background Pattern -->
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle at 20% 20%, rgba(239, 68, 68, 0.03) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(102, 126, 234, 0.05) 0%, transparent 50%);"></div>
+                
+                <div style="position: relative; z-index: 2;">
+                    <div style="text-align: center; margin-bottom: 4rem;">
+                        <h3 style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 2rem; margin-bottom: 1rem;">How We're Different: Value Proposition Comparison</h3>
+                        <p style="color: #a1a1aa; font-size: 1.1rem;">Where others see travel booking, we see travel transformation</p>
+                    </div>
+
+                    <!-- VS Comparison -->
+                    <div style="background: rgba(255, 255, 255, 0.02); border-radius: 24px; padding: 3rem; margin-bottom: 3rem; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); position: relative;">
+                        <!-- VS Badge -->
+                        <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; padding: 0.5rem 1.5rem; border-radius: 20px; font-weight: 700; font-size: 0.875rem; border: 3px solid #0f172a;">
+                            VS
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem;">
+                            <!-- THEM - Current Market -->
+                            <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.15) 100%); border-radius: 20px; padding: 2.5rem; border: 2px solid rgba(239, 68, 68, 0.2); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: -30px; right: -30px; width: 100px; height: 100px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); border-radius: 50%; opacity: 0.1;"></div>
+                                
+                                <div style="position: relative; z-index: 2;">
+                                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                                        <div style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 16px rgba(239, 68, 68, 0.3);">
+                                            <i class="fas fa-building" style="color: white; font-size: 1.2rem;"></i>
+                                        </div>
+                                        <div>
+                                            <h4 style="color: #f87171; margin: 0; font-size: 1.3rem;">Current Market</h4>
+                                            <p style="color: #a1a1aa; margin: 0; font-size: 0.875rem;">What Everyone Else Gives You</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="space-y: 2rem;">
+                                        <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 1.5rem;">
+                                            <h5 style="color: #f4f4f5; font-size: 1rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-gavel" style="color: #f87171;"></i> Policy-First Platforms</h5>
+                                            <p style="font-size: 0.875rem; color: #e4e4e7; margin: 0;">Built for finance teams, not travelers. Rigid rules, limited choices.</p>
+                                        </div>
+                                        
+                                        <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 1.5rem; margin-top: 1rem;">
+                                            <h5 style="color: #f4f4f5; font-size: 1rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-search" style="color: #f87171;"></i> Search & Compare Websites</h5>
+                                            <p style="font-size: 0.875rem; color: #e4e4e7; margin: 0;">Endless options, zero guidance. You do all the work yourself.</p>
+                                        </div>
+                                        
+                                        <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 1.5rem; margin-top: 1rem;">
+                                            <h5 style="color: #f4f4f5; font-size: 1rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-dollar-sign" style="color: #f87171;"></i> Price-Only Tools</h5>
+                                            <p style="font-size: 0.875rem; color: #e4e4e7; margin: 0;">Tell you when to buy, then abandon you during travel.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- US - TakeMeThere -->
+                            <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%); border-radius: 20px; padding: 2.5rem; border: 2px solid rgba(102, 126, 234, 0.3); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: -30px; right: -30px; width: 100px; height: 100px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; opacity: 0.15;"></div>
+                                
+                                <div style="position: relative; z-index: 2;">
+                                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);">
+                                            <i class="fas fa-rocket" style="color: white; font-size: 1.2rem;"></i>
+                                        </div>
+                                        <div>
+                                            <h4 style="color: #667eea; margin: 0; font-size: 1.3rem;">TakeMeThere</h4>
+                                            <p style="color: #a1a1aa; margin: 0; font-size: 0.875rem;">What We're Building For You</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="space-y: 2rem;">
+                                        <div style="background: rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid #667eea;">
+                                            <h5 style="color: #f4f4f5; font-size: 1rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-heart" style="color: #667eea;"></i> Traveler-First Experience</h5>
+                                            <p style="font-size: 0.875rem; color: #e4e4e7; margin: 0;">Built for you, not finance teams. Smart policy compliance with great options.</p>
+                                        </div>
+                                        
+                                        <div style="background: rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid #667eea; margin-top: 1rem;">
+                                            <h5 style="color: #f4f4f5; font-size: 1rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-user-friends" style="color: #667eea;"></i> Personal AI Assistant</h5>
+                                            <p style="font-size: 0.875rem; color: #e4e4e7; margin: 0;">One conversation books your entire trip. Curated, not algorithmic.</p>
+                                        </div>
+                                        
+                                        <div style="background: rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid #667eea; margin-top: 1rem;">
+                                            <h5 style="color: #f4f4f5; font-size: 1rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-shield-alt" style="color: #667eea;"></i> Proactive Travel Guardian</h5>
+                                            <p style="font-size: 0.875rem; color: #e4e4e7; margin: 0;">Manages your entire journey - planning, problems, preferences.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Core Differentiator -->
+                    <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-radius: 20px; padding: 3rem; text-align: center; position: relative; overflow: hidden; border: 1px solid rgba(102, 126, 234, 0.2);">
+                        <div style="position: absolute; inset: 0; background-image: radial-gradient(circle at center, rgba(102, 126, 234, 0.1) 0%, transparent 70%);"></div>
+                        
+                        <div style="position: relative; z-index: 2;">
+                            <div style="display: inline-flex; align-items: center; gap: 1rem; background: rgba(102, 126, 234, 0.2); padding: 1rem 2rem; border-radius: 50px; margin-bottom: 2rem;">
+                                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-lightbulb" style="color: white; font-size: 1rem;"></i>
+                                </div>
+                                <h4 style="color: #667eea; margin: 0; font-size: 1.3rem;">Our Core Differentiator</h4>
+                            </div>
+                            
+                            <p style="color: #f4f4f5; font-size: 1.2rem; line-height: 1.6; margin: 0; max-width: 800px; margin-left: auto; margin-right: auto;">While others treat AI as a <span style="color: #f87171;">feature</span> to optimize their existing broken processes, we've <span style="color: #667eea; font-weight: 600;">rebuilt the entire experience</span> around AI that understands, anticipates, and advocates for the traveler.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GTM Plan -->
+            <div class="card">
+                <h3>Go-to-Market Strategy</h3>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Phase 1: Launch (0-6 months)</h4>
+                        <p><strong>Target:</strong> Tech-savvy early adopters</p>
+                        <p><strong>Channels:</strong> LinkedIn, tech podcasts, TechCrunch, Wired</p>
+                        <p><strong>Strategy:</strong> Beta program with tech companies in SF, NYC, Austin</p>
+                        <p><strong>Partnerships:</strong> Premium co-working spaces (WeWork, Industrious)</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Phase 2: Scale (6-12 months)</h4>
+                        <p><strong>Target:</strong> Mid-market companies</p>
+                        <p><strong>Channels:</strong> B2B sales, account-based marketing</p>
+                        <p><strong>Strategy:</strong> Position as talent retention perk</p>
+                        <p><strong>Partnerships:</strong> HR/expense platforms (Rippling, Brex)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stakeholder Alignment -->
+    <section id="alignment">
+        <div class="container">
+            <div class="section-header">
+                <h2>Stakeholder Alignment</h2>
+                <p>Unifying teams around a shared vision</p>
+            </div>
+
+            <!-- Strategic Alignment Approach -->
+            <div class="card">
+                <h3>How We Align Engineering, Design, Marketing & Sales</h3>
+                <p style="text-align: center; color: #a1a1aa; margin-bottom: 3rem;">A comprehensive 3-phase approach to unify teams around Terra's vision</p>
+                
+                <!-- Phase 1: Foundation -->
+                <div style="margin-bottom: 3rem;">
+                    <h4 style="color: #667eea; margin-bottom: 2rem;"><i class="fas fa-foundation"></i> Phase 1: Build Shared Understanding (Week 1-2)</h4>
+                    
+                    <div class="feature-grid" style="grid-template-columns: 1fr 1fr;">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h4>Vision Workshop</h4>
+                            <p><strong>All teams:</strong> Interactive workshop to co-create Terra's personality, use cases, and success scenarios through collaborative exercises</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-users-cog"></i>
+                            </div>
+                            <h4>Cross-Functional Pairing</h4>
+                            <p><strong>Mixed teams:</strong> Eng+Design, Marketing+Sales pairs work together to identify dependencies and shared goals</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 2: Execution -->
+                <div style="margin-bottom: 3rem;">
+                    <h4 style="color: #fbbf24; margin-bottom: 2rem;"><i class="fas fa-cogs"></i> Phase 2: Aligned Execution (Ongoing)</h4>
+                    
+                    <!-- Top Row -->
+                    <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <div style="background: #1e293b; padding: 2rem; border-radius: 12px; border-left: 4px solid #667eea;">
+                            <h5 style="color: #667eea; margin-bottom: 1.5rem; font-size: 1.1rem;"><i class="fas fa-code"></i> Engineering Focus</h5>
+                            <ul style="font-size: 0.9rem; color: #e4e4e7; list-style: none; padding: 0; line-height: 1.6;">
+                                <li style="margin-bottom: 0.75rem;"><strong>What:</strong> LLM integration, context management, API development</li>
+                                <li style="margin-bottom: 0.75rem;"><strong>Success:</strong> 95% uptime, <200ms response times</li>
+                                <li><strong>Alignment:</strong> Weekly design reviews, sales feedback sessions</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: #1e293b; padding: 2rem; border-radius: 12px; border-left: 4px solid #f59e0b;">
+                            <h5 style="color: #fbbf24; margin-bottom: 1.5rem; font-size: 1.1rem;"><i class="fas fa-paint-brush"></i> Design Focus</h5>
+                            <ul style="font-size: 0.9rem; color: #e4e4e7; list-style: none; padding: 0; line-height: 1.6;">
+                                <li style="margin-bottom: 0.75rem;"><strong>What:</strong> Conversational UI, trust indicators, user journey mapping</li>
+                                <li style="margin-bottom: 0.75rem;"><strong>Success:</strong> >85% task completion, intuitive interactions</li>
+                                <li><strong>Alignment:</strong> Eng feasibility checks, marketing brand consistency</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Bottom Row -->
+                    <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                        <div style="background: #1e293b; padding: 2rem; border-radius: 12px; border-left: 4px solid #10b981;">
+                            <h5 style="color: #22c55e; margin-bottom: 1.5rem; font-size: 1.1rem;"><i class="fas fa-bullhorn"></i> Marketing Focus</h5>
+                            <ul style="font-size: 0.9rem; color: #e4e4e7; list-style: none; padding: 0; line-height: 1.6;">
+                                <li style="margin-bottom: 0.75rem;"><strong>What:</strong> AI-first messaging, competitive positioning, demand gen</li>
+                                <li style="margin-bottom: 0.75rem;"><strong>Success:</strong> 25% increase in qualified leads, AI differentiation</li>
+                                <li><strong>Alignment:</strong> Product demos from design, sales objection handling</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: #1e293b; padding: 2rem; border-radius: 12px; border-left: 4px solid #ef4444;">
+                            <h5 style="color: #f87171; margin-bottom: 1.5rem; font-size: 1.1rem;"><i class="fas fa-handshake"></i> Sales Focus</h5>
+                            <ul style="font-size: 0.9rem; color: #e4e4e7; list-style: none; padding: 0; line-height: 1.6;">
+                                <li style="margin-bottom: 0.75rem;"><strong>What:</strong> AI value storytelling, demo optimization, customer feedback</li>
+                                <li style="margin-bottom: 0.75rem;"><strong>Success:</strong> 30% faster deal closure, higher ASP with AI features</li>
+                                <li><strong>Alignment:</strong> Engineering for demo reliability, marketing for collateral</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 3: Optimization -->
+                <div>
+                    <h4 style="color: #22c55e; margin-bottom: 2rem;"><i class="fas fa-chart-line"></i> Phase 3: Continuous Alignment (Monthly)</h4>
+                    
+                    <div class="feature-grid" style="grid-template-columns: 1fr 1fr;">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-sync"></i>
+                            </div>
+                            <h4>Cross-Team Retrospectives</h4>
+                            <p><strong>Monthly ritual:</strong> What's working? What's blocking? How do we improve collaboration? Data-driven decisions with shared KPIs</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <h4>Shared Success Metrics</h4>
+                            <p><strong>Unified goals:</strong> All teams measured on Terra adoption rate, user satisfaction, and revenue impact - not individual departmental metrics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Communication Framework -->
+            <div class="card">
+                <h3>Communication & Decision Making Framework</h3>
+                
+                <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <h4 style="color: #667eea; margin-bottom: 1rem;">Decision Rights (RACI)</h4>
+                        <div style="background: #1e293b; padding: 1.5rem; border-radius: 12px;">
+                            <div style="margin-bottom: 1rem;">
+                                <strong style="color: #f4f4f5;">Product Strategy:</strong>
+                                <span style="color: #a1a1aa; font-size: 0.875rem; display: block; margin-top: 0.25rem;"> PM (Responsible), Engineering (Accountable), Design (Consulted), Sales (Informed)</span>
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <strong style="color: #f4f4f5;">Technical Architecture:</strong>
+                                <span style="color: #a1a1aa; font-size: 0.875rem; display: block; margin-top: 0.25rem;"> Engineering (Responsible/Accountable), Design (Consulted), Marketing (Informed)</span>
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <strong style="color: #f4f4f5;">GTM Strategy:</strong>
+                                <span style="color: #a1a1aa; font-size: 0.875rem; display: block; margin-top: 0.25rem;"> Marketing (Responsible), Sales (Accountable), PM (Consulted), Engineering (Informed)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 style="color: #667eea; margin-bottom: 1rem;">Conflict Resolution</h4>
+                        <div style="background: #1e293b; padding: 1.5rem; border-radius: 12px;">
+                            <div style="margin-bottom: 1rem;">
+                                <strong style="color: #f4f4f5;">Level 1:</strong>
+                                <span style="color: #a1a1aa; font-size: 0.875rem; display: block; margin-top: 0.25rem;"> Direct team negotiation (48hrs)</span>
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <strong style="color: #f4f4f5;">Level 2:</strong>
+                                <span style="color: #a1a1aa; font-size: 0.875rem; display: block; margin-top: 0.25rem;"> Department heads alignment (1 week)</span>
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <strong style="color: #f4f4f5;">Level 3:</strong>
+                                <span style="color: #a1a1aa; font-size: 0.875rem; display: block; margin-top: 0.25rem;"> Executive decision with customer data</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Frameworks -->
+            <div class="card">
+                <h3>Frameworks & Rituals</h3>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-project-diagram"></i> V-Model for AI</h4>
+                        <p>Every development stage has corresponding validation to ensure accuracy and fairness</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-calendar-week"></i> Weekly Demo Days</h4>
+                        <p>Friday demos foster transparency and maintain momentum</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-chart-line"></i> Biweekly Reviews</h4>
+                        <p>Assess KPIs, re-evaluate priorities, align on next quarter</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Metrics -->
+    <section id="metrics">
+        <div class="container">
+            <div class="section-header">
+                <h2>Success Metrics</h2>
+                <p>Measuring the impact of intelligence</p>
+            </div>
+
+            <!-- KPI Dashboard -->
+            <div class="card">
+                <h3>Key Performance Indicators</h3>
+                
+                <h4 style="margin-top: 2rem;">UX Success & GenAI Impact</h4>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">>85%</div>
+                        <div class="metric-label">Task Success Rate (TSR)</div>
+                        <p style="font-size: 0.875rem; color: #71717a; margin-top: 0.5rem;">AI query resolution without human intervention</p>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">50%</div>
+                        <div class="metric-label">Time-to-Book Reduction</div>
+                        <p style="font-size: 0.875rem; color: #71717a; margin-top: 0.5rem;">vs. traditional workflow</p>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">>75%</div>
+                        <div class="metric-label">Proactive Intervention Rate</div>
+                        <p style="font-size: 0.875rem; color: #71717a; margin-top: 0.5rem;">Successful disruption solutions</p>
+                    </div>
+                </div>
+
+                <h4 style="margin-top: 2rem;">Product-Market Fit & Business Goals</h4>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">>60%</div>
+                        <div class="metric-label">AI Feature Adoption</div>
+                        <p style="font-size: 0.875rem; color: #71717a; margin-top: 0.5rem;">Within 3 months of launch</p>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">>50</div>
+                        <div class="metric-label">Net Promoter Score</div>
+                        <p style="font-size: 0.875rem; color: #71717a; margin-top: 0.5rem;">For AI-powered interactions</p>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">>80%</div>
+                        <div class="metric-label">Retention Rate</div>
+                        <p style="font-size: 0.875rem; color: #71717a; margin-top: 0.5rem;">Second trip booking rate</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Validation Methods -->
+            <div class="card">
+                <h3>Validation & Iteration Methods</h3>
+                
+                <div class="grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-vial"></i> A/B Testing</h4>
+                        <p>Systematically test AI workflows against classic UI to quantify improvements</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-magic"></i> Wizard of Oz Testing</h4>
+                        <p>Simulate complex AI responses with human operators to test usability early</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-sync"></i> Continuous Feedback</h4>
+                        <p>Simple thumbs up/down after each interaction for real-time model improvement</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Final CTA -->
+            <div class="card" style="text-align: center;">
+                <h3>The Path Forward</h3>
+                <p style="font-size: 1.25rem; margin-bottom: 2rem;">By adopting this data-driven and user-centric approach, TakeMeThere Ltd. can successfully navigate its strategic challenges and emerge as the undisputed leader in the next generation of business travel.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- References -->
+    <section id="references" style="background: #0f172a; padding: 4rem 0;">
+        <div class="container">
+            <div class="section-header">
+                <h2>References & Sources</h2>
+                <p>All statistics and insights are backed by industry research and verified data sources</p>
+            </div>
+            <div class="card">
+                <h3>Key Sources & References</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <!-- Market Analysis -->
+                    <div>
+                        <h4 style="color: #667eea; margin-bottom: 1rem;">Market & Industry Analysis</h4>
+                        <ul style="font-size: 0.875rem; line-height: 1.6;">
+                            <li>Global Business Travel Association (GBTA) 2024 Report</li>
+                            <li>Deloitte Corporate Travel Study 2024</li>
+                            <li>World Travel & Tourism Council Business Travel Report</li>
+                            <li>McKinsey Travel Industry Analysis 2024</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Statistics -->
+                    <div>
+                        <h4 style="color: #667eea; margin-bottom: 1rem;">Travel Statistics & Data</h4>
+                        <ul style="font-size: 0.875rem; line-height: 1.6;">
+                            <li>TravelPerk Business Travel Statistics 2024</li>
+                            <li>Expensify Business Travel Cost Analysis</li>
+                            <li>Financesonline Business Travel Report</li>
+                            <li>HSM Magazine Travel Impact Survey</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Technology & AI -->
+                    <div>
+                        <h4 style="color: #667eea; margin-bottom: 1rem;">AI & Technology Research</h4>
+                        <ul style="font-size: 0.875rem; line-height: 1.6;">
+                            <li>OpenAI GPT-4 Technical Documentation</li>
+                            <li>Anthropic Claude AI Research Papers</li>
+                            <li>MIT Technology Review AI Applications</li>
+                            <li>Gartner AI in Travel Technology Report</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Competitive Analysis -->
+                    <div>
+                        <h4 style="color: #667eea; margin-bottom: 1rem;">Competitive Intelligence</h4>
+                        <ul style="font-size: 0.875rem; line-height: 1.6;">
+                            <li>Navan (TripActions) Product Documentation</li>
+                            <li>Expedia for Business Platform Analysis</li>
+                            <li>KAYAK & Hopper AI Feature Reviews</li>
+                            <li>Corporate Travel Platform Comparisons</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="background: rgba(102, 126, 234, 0.1); padding: 1rem; border-radius: 8px; margin-top: 1.5rem; text-align: center;">
+                    <p style="margin: 0; font-size: 0.875rem; color: #a1a1aa;">All data sourced from 2024-2025 industry research & verified through multiple independent sources</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Indicator -->
+    <div class="progress-container">
+        <div class="progress-dots">
+            <div class="progress-dot active" data-section="hero"></div>
+            <div class="progress-dot" data-section="opportunity"></div>
+            <div class="progress-dot" data-section="strategy"></div>
+            <div class="progress-dot" data-section="positioning"></div>
+            <div class="progress-dot" data-section="alignment"></div>
+            <div class="progress-dot" data-section="metrics"></div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Progress indicator
+        const sections = document.querySelectorAll('section');
+        const progressDots = document.querySelectorAll('.progress-dot');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            progressDots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.getAttribute('data-section') === current) {
+                    dot.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
